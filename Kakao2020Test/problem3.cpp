@@ -11,60 +11,41 @@ vector<int> problem3::solution(vector<string> gems) {
 		s.insert(str);
 	}
 
-	int a = 0, b = 0;
+	int a = 0, b = 0, length = 0;
 
-	bool isFirst = false;
-	for (int i = 0; i < gems.size(); i++) {
+	answer.push_back(0);
+	answer.push_back(gems.size());
 
-		if (isFirst == false) {
-			m[gems[i]]++;
-			if (m.size() == s.size()) {
-				// 모든 종류가 포함됨.
-				b = i;
+	bool plusFlag = false;
 
-				for (int j = a; j < b; j++) {
-					if (m[gems[j]] - 1 <= 0) {
-						break;
-					}
-					else {
-						// 빠져도 모든 종류 포함됨.
-						m[gems[j]]--;
-						a = j + 1;
-					}
-				}
+	while (true) {
 
+		if (m.size() == s.size()) {
+			m[gems[a]]--;
+			if (m[gems[a]] <= 0)
+				m.erase(gems[a]);
+			a++;
+			plusFlag = false;
+		}
+		else if (b == gems.size()) {
+			break;
+		}
+		else if (m.size() != s.size()) {
+			m[gems[b]]++;
+			plusFlag = true; // b++ 이라는 flag.
+		}
+
+		if (m.size() == s.size()) {
+			if (answer[1] - answer[0] > b - a) {
+				answer.clear();
 				answer.push_back(a + 1);
 				answer.push_back(b + 1);
-				cout << "처음. " << a << "," << b << endl;
-				isFirst = true;
 			}
 		}
 		else {
-			// 첫 길이가 완성 된 이후
-			m[gems[a]]--;
-			m[gems[i]]++;
-			if (m[gems[a]] > 0) {
-				a++;
-				b = i;
-
-				for (int j = a; j < b; j++) {
-					if (m[gems[j]] - 1 <= 0) {
-						break;
-					}
-					else {
-						// 빠져도 모든 종류 포함됨.
-						m[gems[j]]--;
-						a = j + 1;
-					}
-				}
-
-				if (answer[1] - answer[0] > b - a) {
-					answer.push_back(a + 1);
-					answer.push_back(b + 1);
-					cout << "다음. " << a << "," << b << endl;
-				}
-			}
+			b++;
 		}
+
 	}
 
 	return answer;
@@ -75,14 +56,14 @@ void problem3::execute() {
 
 	vector<string> v;
 
-	v.push_back("DIA");
-	v.push_back("RUBY");
-	v.push_back("RUBY");
-	v.push_back("DIA");
-	v.push_back("DIA");
-	v.push_back("EMERALLD");
-	v.push_back("SAPPHIRE");
-	v.push_back("DIA");
+	v.push_back("ZZZ");
+	v.push_back("YYY");
+	v.push_back("NNNN");
+	v.push_back("YYY");
+	v.push_back("BBB");
+	//v.push_back("EMERALLD");
+	//v.push_back("SAPPHIRE");
+	//v.push_back("DIA");
 
 	vector<int> vv = solution(v);
 	cout << vv[0] << " " << vv[1] << endl;
