@@ -8,9 +8,9 @@ int main() {
 
 	//problem1::execute();
 	//problem2::execute();
-	problem3::execute();
+	//problem3::execute();
 	//problem4::execute();
-	//problem5::execute();
+	problem5::execute();
 
 	return 0;
 }

@@ -1,8 +1,11 @@
 #pragma once
+#include <iostream>
 #include <vector>
+#include <algorithm>
 #include <map>
+#include <set>
 #include <stack>
-
+#include <deque>
 
 using namespace std;
 
